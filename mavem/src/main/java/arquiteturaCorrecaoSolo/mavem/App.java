@@ -7,8 +7,16 @@ public class App {
 	public static void main( String[] args ){
 		App app = new App();
     	Dados dados = new Dados();
-    	Scanner ler = new Scanner(System.in);
-       
+    	dados = app.lerDados();
+    	
+    	
+    	app.escreverDados(dados);
+    }
+
+	private Dados lerDados() {
+		Dados dados = new Dados();
+		Scanner ler = new Scanner(System.in);
+	       
     	System.out.println("Por favor entre com os dados da analise:");
        
 
@@ -46,17 +54,52 @@ public class App {
        dados.getElementosAtuais().setMagnesio(ler.nextDouble());
        
        System.out.println("\nQuantidade de Enxofre (mg.dm³): ");
-       dados.getElementosAtuais().setMagnesio(ler.nextDouble());
+       dados.getElementosAtuais().setEnxofre(ler.nextDouble());
        
-       System.out.println("\nQuantidade de Enxofre: ");
+       System.out.println("\nQuantidade de Aluminio: ");
        dados.getElementosAtuais().setAluminio(ler.nextDouble());
        
        System.out.println("\nQuantidade de H+AL: ");
        dados.getElementosAtuais().sethAl(ler.nextDouble());
        
-       dados.setElementosIdeais(app.defineIdeal(dados.getTexturaSolo()));
-    }
+       ler.close();
+       
+       dados.setElementosIdeais(defineIdeal(dados.getTexturaSolo()));
+       
+       return dados;
+	}
+	
+	
+	private void escreverDados(Dados dados) {
+		System.out.print("Textura do solo: "+dados.getTexturaSolo()+(dados.getTexturaSolo()==1?" Argiloso + 40% de argila":"Textura Média 25 a 40% de argila"));
+		System.out.println("\tSistema de Cultivo: "+dados.getSistemaCultivo()+(dados.getSistemaCultivo() == 1 ? " Plantio Direto":" Convencional"));
+		
+		System.out.println("Responsável Técnico: "+dados.getResponsavelTecnico()+"\tProfundidade da amostra de solos: "+dados.getProfundidadeAmostra()+" cm");
+		
+		System.out.println("Resultado da análise de solos Nº: "+dados.getNumeroAnalise());
+		
+		System.out.println("\n----Teores dos elementos no solo e Ideais!----\n");
 
+		System.out.println("Fósforo; No solo: "+dados.getElementosAtuais().getFosforo()+ " Ideal: "+dados.getElementosIdeais().getFosforo());
+		
+		System.out.println("Potássio: "+dados.getElementosAtuais().getPotassio()+" Ideal: "+dados.getElementosIdeais().getPotassio());
+		
+		System.out.println("Calcio: "+dados.getElementosAtuais().getCalcio()+ " Ideal: "+dados.getElementosIdeais().getCalcio());
+		
+		System.out.println("Magnésio: "+dados.getElementosAtuais().getMagnesio()+ "Ideal: "+dados.getElementosIdeais().getMagnesio());
+		
+		System.out.println("Enxofre: "+dados.getElementosAtuais().getEnxofre()+ " Ideal: "+dados.getElementosIdeais().getEnxofre());
+		
+		System.out.println("Aluminio: "+dados.getElementosAtuais().getAluminio()+" Ideal: "+dados.getElementosIdeais().getAluminio());
+		
+		System.out.println("H+AL: "+dados.getElementosAtuais().gethAl()+" Ideal: "+dados.getElementosIdeais().gethAl());
+		
+		System.out.println("S cmol: "+calculaSCmol(dados.getElementosAtuais()));
+		System.out.println("CTC cmol: "+calculaCTCCmol(dados.getElementosAtuais()));
+		System.out.println("v% atual: "+calculaVAtual(dados.getElementosAtuais()));
+	}
+	
+	
 	private Elemento defineIdeal(int tipoSolo) {
 		Elemento elementosIdeais = new Elemento();
 
@@ -87,5 +130,37 @@ public class App {
 			return elementosIdeais;
 		}
 	}
+	
+	private double calculaSCmol(Elemento elementoAtual) {
+		return elementoAtual.getPotassio() + elementoAtual.getCalcio() + elementoAtual.getMagnesio();
+	}
+	
+	private double calculaCTCCmol(Elemento elementoAtual) {
+		return calculaSCmol(elementoAtual) + elementoAtual.gethAl();
+	}
 
+	private double calculaVAtual(Elemento elementoAtual) {
+		return 100*calculaSCmol(elementoAtual)/calculaCTCCmol(elementoAtual);
+	}
+	
+	private double fosforoCorrecao() {
+		return 0.0;
+	}
+	
+	private double potassioCorrecao(Elemento elementoAtual) {
+		if(elementoAtual.getPotassio() > 0.5) {
+			return elementoAtual.getPotassio();
+		} else {
+			if (conta1(0,elementoAtual) < 0.01) {
+				return elementoAtual.getPotassio();
+			} else {
+				return conta1(0,elementoAtual) +elementoAtual.getPotassio();
+			}
+		}
+	}
+	
+	private double conta1(double participacaoDesejada, Elemento elementoAtual ) {
+		return (elementoAtual.getPotassio() * (participacaoDesejada /100) /
+			(elementoAtual.getPotassio()/calculaCTCCmol(elementoAtual)*100)) - elementoAtual.getPotassio();
+	}
 }
