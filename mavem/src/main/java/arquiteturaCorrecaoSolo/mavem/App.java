@@ -100,7 +100,7 @@ public class App {
 	}
 	
 	
-	private Elemento defineIdeal(int tipoSolo) {
+	public Elemento defineIdeal(int tipoSolo) {
 		Elemento elementosIdeais = new Elemento();
 
 		switch (tipoSolo) {
@@ -131,23 +131,23 @@ public class App {
 		}
 	}
 	
-	private double calculaSCmol(Elemento elementoAtual) {
+	public double calculaSCmol(Elemento elementoAtual) {
 		return elementoAtual.getPotassio() + elementoAtual.getCalcio() + elementoAtual.getMagnesio();
 	}
 	
-	private double calculaCTCCmol(Elemento elementoAtual) {
+	public double calculaCTCCmol(Elemento elementoAtual) {
 		return calculaSCmol(elementoAtual) + elementoAtual.gethAl();
 	}
 
-	private double calculaVAtual(Elemento elementoAtual) {
+	public double calculaVAtual(Elemento elementoAtual) {
 		return 100*calculaSCmol(elementoAtual)/calculaCTCCmol(elementoAtual);
 	}
 	
-	private double fosforoCorrecao() {
+	public double fosforoCorrecao() {
 		return 0.0;
 	}
 	
-	private double potassioCorrecao(Elemento elementoAtual) {
+	public double potassioCorrecao(Elemento elementoAtual) {
 		if(elementoAtual.getPotassio() > 0.5) {
 			return elementoAtual.getPotassio();
 		} else {
@@ -159,7 +159,7 @@ public class App {
 		}
 	}
 	
-	private double conta1(double participacaoDesejada, Elemento elementoAtual ) {
+	public double conta1(double participacaoDesejada, Elemento elementoAtual ) {
 		return (elementoAtual.getPotassio() * (participacaoDesejada /100) /
 			(elementoAtual.getPotassio()/calculaCTCCmol(elementoAtual)*100)) - elementoAtual.getPotassio();
 	}
