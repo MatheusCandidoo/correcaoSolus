@@ -137,14 +137,6 @@ public class App {
         }
         return 0.0;
     }
-    
-    public double quantidadeFosforoAplicar(double enumFosforo, double fosforoAtingir, double fosforoNoSolo, double eficienciaFosforo){
-        //return ((((fosforoAtingir-fosforoNoSolo)*2)*2,29)*100/eficienciaFosforo/100)*100/enumFosforo;
-        return (((((((fosforoAtingir-fosforoNoSolo)*2)*2.29)*100)/eficienciaFosforo)/100)*100)/enumFosforo;
-    }
-    
-    public double custoFosforoPorHectare(double valorFonteFosforo, double quantidadeFosforoAplicar){
-        return ((valorFonteFosforo*(quantidadeFosforoAplicar*2.42))/1000)/2.42;
-    }
+
 
 }

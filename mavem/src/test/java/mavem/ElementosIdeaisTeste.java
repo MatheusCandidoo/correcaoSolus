@@ -1,12 +1,10 @@
 package mavem;
 
-import static org.junit.Assert.*;
 
 import org.junit.Assert;
 import org.junit.Before;
 import arquiteturaCorrecaoSolo.mavem.App;
 import org.junit.Test;
-import static org.junit.Assert.*;
 
 // Aplicando teste unitário sobre a função defineIdeal;
 
