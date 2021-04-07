@@ -41,7 +41,18 @@ public class TesteCorrecaoFosforo {
     
     @Test
     public void testeQuantidadeFosforoAplicar(){
-        assertEquals(51.25, new CorrecaoFosforo().quantidadeFosforoAplicar(9.23, EnumFosforo.SUPERFOSFATO.valorFonteFosforo()), 0.2);
+        assertEquals(51.25, new CorrecaoFosforo().quantidadeFosforoAplicar(9.23, EnumFosforo.SUPERFOSFATO_SIMPLES.valorFonteFosforo()), 0.2);
+        assertEquals(22.51, new CorrecaoFosforo().quantidadeFosforoAplicar(9.23, EnumFosforo.SUPERFOSFATO_TRIPLO.valorFonteFosforo()), 0.2);
+        assertEquals(19.22, new CorrecaoFosforo().quantidadeFosforoAplicar(9.23, EnumFosforo.MAP.valorFonteFosforo()), 0.2);
+        assertEquals(20.51, new CorrecaoFosforo().quantidadeFosforoAplicar(9.23, EnumFosforo.DAP.valorFonteFosforo()), 0.2);
+        assertEquals(51.27, new CorrecaoFosforo().quantidadeFosforoAplicar(9.23, EnumFosforo.TERMOFOSTATO_YOORIN.valorFonteFosforo()), 0.2);
+        assertEquals(27.96 ,new CorrecaoFosforo().quantidadeFosforoAplicar(9.23, EnumFosforo.FOSFATO_REAT_ARAD.valorFonteFosforo()), 0.2);
+        assertEquals(31.82, new CorrecaoFosforo().quantidadeFosforoAplicar(9.23, EnumFosforo.FOSFATO_REATIVO_GAFSA.valorFonteFosforo()), 0.2);
+        assertEquals(28.84, new CorrecaoFosforo().quantidadeFosforoAplicar(9.23, EnumFosforo.FOSFATO_REATIVO_DAOUI.valorFonteFosforo()), 0.2);
+        assertEquals(38.45, new CorrecaoFosforo().quantidadeFosforoAplicar(9.23, EnumFosforo.FOSF_NAT_PATOS_DE_MINAS.valorFonteFosforo()), 0.2);
+        assertEquals(49.89, new CorrecaoFosforo().quantidadeFosforoAplicar(9.23, EnumFosforo.ESCORIA_DE_THOMAS.valorFonteFosforo()), 0.2);
+        assertEquals(17.75, new CorrecaoFosforo().quantidadeFosforoAplicar(9.23, EnumFosforo.ACIDO_FOSFORICO.valorFonteFosforo()), 0.2);
+        assertEquals(51.27, new CorrecaoFosforo().quantidadeFosforoAplicar(9.23, EnumFosforo.MULTIFOSFATO_MAGNESIANO.valorFonteFosforo()), 0.2);
     }
     
     @Test

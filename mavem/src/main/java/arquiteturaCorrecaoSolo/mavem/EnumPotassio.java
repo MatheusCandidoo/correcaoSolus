@@ -21,11 +21,6 @@ public enum EnumPotassio {
             return 22.0;
         }
 
-    },
-    NITRATO_DE_POTASSIO {
-        public double valorElemento() {
-            return 44.0;
-        }
     };
 
     public abstract double valorElemento();

@@ -6,7 +6,7 @@ package arquiteturaCorrecaoSolo.mavem;
  * @author candido
  */
 public enum EnumFosforo {
-    SUPERFOSFATO{
+    SUPERFOSFATO_SIMPLES{
         public double valorFonteFosforo(){
             return 18.0;
         }
@@ -21,9 +21,14 @@ public enum EnumFosforo {
             return 48.0;
         }
     },
+    DAP{
+      public double valorFonteFosforo(){
+          return 45;
+      }  
+    },
     TERMOFOSTATO_YOORIN{
         public double valorFonteFosforo(){
-            return 45.0;
+            return 18.0;
         }
     },
     FOSFATO_REAT_ARAD{
